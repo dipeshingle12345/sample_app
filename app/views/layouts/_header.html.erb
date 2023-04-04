@@ -1,12 +1,12 @@
  <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to "sample app", '#', id: "logo" %>
+          <%= link_to "sample app",  root_path , id: "logo" %>
           <nav>
             <ul class="nav nav-pills pull-right ">
-              <li  ><%= link_to "Home",    '#' , class:"text-white" %></li>
+              <li  ><%= link_to "Home",   root_path  , class:"text-white" %></li>
               <li><%= link_to "Help",    '#', class:"text-white"  %></li>
-              <li><%= link_to "Sign in", '#' , class:"text-white" %></li>
+              <li><%= link_to "Sign up", '/signup' , class:"text-white" %></li>
             </ul>
           </nav>
         </div>

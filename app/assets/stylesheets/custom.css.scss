@@ -1,5 +1,9 @@
 @import "bootstrap";
-
+$lightcolor:#222;
+$greyMediumLight:#eaeaea;
+$grey:#555;
+$greyDarker:#222;
+$greyLight:#999;
 html {
     overflow-y: scroll;
   }
@@ -43,7 +47,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 30px;
     text-align: center;
     font-weight: normal;
-    color: #999;
+    color: $greyLight;
   }
   
   p {
@@ -85,15 +89,15 @@ footer {
     margin-top: 45px;
     padding-top: 5px;
     border-top: 1px solid #eaeaea;
-    color: #999;
+    color: $greyLight;
   }
   
   footer a {
-    color: #555;
+    color: $grey;
   }
   
   footer a:hover {
-    color: #222;
+    color: $greyDarker
   }
   
   footer small {
@@ -108,4 +112,9 @@ footer {
   footer ul li {
     float: left;
     margin-left: 10px;
+  }
+
+
+  #railsLogo{
+    width: 100px;
   }
