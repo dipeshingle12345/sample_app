@@ -10,6 +10,18 @@ class UsersController < ApplicationController
     params[:id].to_i == 0 ? (redirect_to new_user_path , notice: "user does not exist." ): (@user = User.find(params[:id]))
 
   end
+  def edit
+    @user = User.find(params[:id])
+  end
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
   def create
     @user = User.new(user_params)
     if @user.save
@@ -25,4 +37,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
+ 
 end
