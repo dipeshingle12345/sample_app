@@ -17,6 +17,8 @@ describe User do
   it { should respond_to(:admin) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:microposts) }
+  it { should respond_to(:feed) }
+  
 
   it { should be_valid }
   it { should_not be_admin }
@@ -140,6 +142,20 @@ describe User do
       expect(microposts).not_to be_empty
       microposts.each do |micropost|
         expect(Micropost.where(id: micropost.id)).to be_empty
+      end
+    end
+    describe "status" do
+      let(:unfollowed_post) do
+        FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
+      end
+      it "should include newer_micropost in feed" do
+        @user.feed.should include(newer_micropost)
+      end
+      it "should include older_micropost in feed" do
+        @user.feed.should include(older_micropost)
+      end
+      it "should include unfollowed_post in feed" do
+        @user.feed.should_not include(unfollowed_post)
       end
     end
   end
