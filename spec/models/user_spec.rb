@@ -18,6 +18,15 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:microposts) }
   it { should respond_to(:feed) }
+  it { should respond_to(:relationships) }
+  it { should respond_to(:followed_users) }
+  it { should respond_to(:following?) }
+  it { should respond_to(:follow!) }
+  it { should respond_to(:unfollow!) }
+  it { should respond_to(:reverse_relationships) }
+  it { should respond_to(:followers) }
+  
+
   
 
   it { should be_valid }
@@ -159,5 +168,39 @@ describe User do
       end
     end
   end
-
+  describe "following" do
+    let(:other_user) { FactoryGirl.create(:user) }
+    before do
+      @user.save
+      @user.follow!(other_user)
+    end
+  
+    it "should be following other_user" do
+      expect(subject).to be_following(other_user)
+    end
+  
+    it "should include other_user in followed_users" do
+      expect(subject.followed_users).to include(other_user)
+    end
+  
+    describe "followed user" do
+      subject { other_user }
+  
+      it "should include @user in followers" do
+        expect(subject.followers).to include(@user)
+      end
+    end
+  
+    describe "and unfollowing" do
+      before { @user.unfollow!(other_user) }
+  
+      it "should not be following other_user" do
+        expect(subject).to_not be_following(other_user)
+      end
+  
+      it "should not include other_user in followed_users" do
+        expect(subject.followed_users).to_not include(other_user)
+      end
+    end
+  end
 end

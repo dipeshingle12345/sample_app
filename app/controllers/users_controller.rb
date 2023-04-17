@@ -12,8 +12,14 @@ class UsersController < ApplicationController
  
 
   def show
-    @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
+    if params[:id].to_i == 0
+      redirect_to root_path
+    else
+      @user = User.find(params[:id])
+      @microposts = @user.microposts.paginate(page: params[:page])
+    end
+    
+    
   end
   def edit
   end
